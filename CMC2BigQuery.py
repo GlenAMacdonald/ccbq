@@ -61,7 +61,7 @@ def trim500(fullDataFrame):
 def initiate_logger():
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
-    handler = logging.FileHandler('/home/Spare/workspace/CMC - Gather and Store into BigQuery/root/nested/BQwritelog/BQwrite-{0}.log'.format(datetime.date.today()))
+    handler = logging.FileHandler('/home/Spare/CC/cmc2bq/log/cmc2bq-{0}.log'.format(datetime.date.today()))
     handler.setLevel(logging.INFO)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     handler.setFormatter(formatter)
@@ -70,7 +70,7 @@ def initiate_logger():
 
 def setloggerfilename():
     global logger
-    handler = logging.FileHandler('/home/Spare/workspace/CMC - Gather and Store into BigQuery/root/nested/BQwritelog/BQwrite-{0}.log'.format(datetime.date.today()))
+    handler = logging.FileHandler('/home/Spare/CC/cmc2bq/log/cmc2bq-{0}.log'.format(datetime.date.today()))
     handler.setLevel(logging.INFO)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     handler.setFormatter(formatter)
