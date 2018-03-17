@@ -15,16 +15,29 @@ import coinmarketcap as cmc
 import schedule
 
 market = cmc.Market()
+
+def timenow():
+    currenttimestr = "{:%Y-%m-%d %H:%M}".format(datetime.datetime.now())
+    return currenttimestr
     
-def get500t(q,qout):
+def get500t(q,qout,logger):
     args = q.get()
     # Reference API call: market.ticker('?start=0&limit=100')
-    data = market.ticker('?start={0}&limit={1}'.format(args[0],args[1]))
+    connected = False
+    while connected == False:
+        try:
+            data = market.ticker('?start={0}&limit={1}'.format(args[0],args[1]))
+            connected = True
+        except Exception as e:
+            sleeplength = 60            
+            currenttimestr = timenow()
+            logger.error('CMC connection error at {0}. Sleeping for {1} seconds'.format(currenttimestr,sleeplength))
+            time.sleep(sleeplength)        
     qout.put(data)
     q.task_done()
     return
     
-def get500q():
+def get500q(logger):
     q500 = Queue.Queue()
     q500out = Queue.Queue()
     last = 499
@@ -35,7 +48,7 @@ def get500q():
         end = start + step - 1
         q500.put((start,end))
     for i in range(q500.qsize()):
-        t = threading.Thread(target = get500t, args = (q500,q500out))
+        t = threading.Thread(target = get500t, args = (q500,q500out,logger))
         t.start()
     q500.join()
     framelist = [pd.DataFrame(q500out.get())]
@@ -281,7 +294,7 @@ def uploaddata_q(bigquery_client,data,tlist_DF,numthreads, logger):
     return
 
 def runonce(bigquery_client, projectid, dataset_ref, tlist_DF, tlist_BQ, logger):
-    df = get500q()
+    df = get500q(logger)
     df2 = trim500(df)
     [tlist_DF, df3] = align500(df2, tlist_DF, bigquery_client, tlist_BQ, dataset_ref, logger)
     numthreads = 20
@@ -298,10 +311,13 @@ def g_tick(period):
 def runfor(bigquery_client, projectid, dataset_ref, logger, runs, xmin):
     [tlist_DF, tlist_BQ] = goc_table_list(bigquery_client, dataset_ref, projectid)
     setloggerfilename()
-    g = g_tick(xmin*60)
+    freq = xmin*60
+    g = g_tick(freq)
     while runs > 0:
         tlist_DF = runonce(bigquery_client, projectid, dataset_ref, tlist_DF, tlist_BQ, logger)
         time.sleep(g.next())
+        if g == 0:
+            g = g_tick(freq)
         runs -= 1
     return
 
@@ -313,11 +329,14 @@ def schedulethread():
 
 def runforever(bigquery_client, projectid, dataset_ref, logger, xmin):
     [tlist_DF, tlist_BQ] = goc_table_list(bigquery_client, dataset_ref, projectid)
-    g = g_tick(xmin*60)
+    freq = xmin*60
+    g = g_tick(freq)
     schedule.every().monday.do(setloggerfilename)
     t=threading.Thread(target=schedulethread)
     while True:
         tlist_DF = runonce(bigquery_client, projectid, dataset_ref, tlist_DF, tlist_BQ, logger)
+        if g == 0:
+            g = g_tick(freq)
         time.sleep(g.next())
     return
 
