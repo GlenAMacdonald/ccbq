@@ -29,8 +29,9 @@ def get500t(q,qout,logger):
             data = market.ticker('?start={0}&limit={1}'.format(args[0],args[1]))
             connected = True
         except Exception as e:
-            sleeplength = 60            
+            sleeplength = 30            
             currenttimestr = timenow()
+            print 'CMC connection error at {0}. Sleeping for {1} seconds'.format(currenttimestr,sleeplength)
             logger.error('CMC connection error at {0}. Sleeping for {1} seconds'.format(currenttimestr,sleeplength))
             time.sleep(sleeplength)        
     qout.put(data)
@@ -348,5 +349,5 @@ dataset_ref = bigquery_client.dataset(dataset_id)
 #numthreads = 20
 #initiate the Logger
 logger = initiate_logger()
-runforever(bigquery_client, projectid, dataset_ref, logger, 1)
+runforever(bigquery_client, projectid, dataset_ref, logger, 5)
 
