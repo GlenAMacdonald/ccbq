@@ -13,3 +13,63 @@
 2018-03-17 22:46:01,309 - __main__ - ERROR - CMC connection error at 2018-03-17 22:46. Sleeping for 60 seconds
 2018-03-17 22:46:01,310 - __main__ - ERROR - CMC connection error at 2018-03-17 22:46. Sleeping for 60 seconds
 2018-03-17 22:47:28,981 - __main__ - ERROR - CMC connection error at 2018-03-17 22:47. Sleeping for 60 seconds
+2018-03-18 02:32:25,079 - __main__ - ERROR - Problem inserting row for symbol: NEOS
+2018-03-18 02:32:25,256 - __main__ - ERROR - Problem inserting row for symbol: PHR
+2018-03-18 02:32:25,285 - __main__ - ERROR - Problem inserting row for symbol: DENT
+2018-03-18 02:32:25,303 - __main__ - ERROR - 409 POST https://www.googleapis.com/bigquery/v2/projects/pythonproject-190701/datasets/cmcdataset/tables: Already Exists: Table pythonproject-190701:cmcdataset.NEOS
+Traceback (most recent call last):
+  File "CMC2BigQuery.py", line 252, in create_table
+    table = bigquery_client.create_table(table)
+  File "/usr/local/lib/python2.7/dist-packages/google/cloud/bigquery/client.py", line 268, in create_table
+    method='POST', path=path, data=resource)
+  File "/usr/local/lib/python2.7/dist-packages/google/cloud/_http.py", line 293, in api_request
+    raise exceptions.from_http_response(response)
+Conflict: 409 POST https://www.googleapis.com/bigquery/v2/projects/pythonproject-190701/datasets/cmcdataset/tables: Already Exists: Table pythonproject-190701:cmcdataset.NEOS
+2018-03-18 02:32:25,376 - __main__ - ERROR - 409 POST https://www.googleapis.com/bigquery/v2/projects/pythonproject-190701/datasets/cmcdataset/tables: Already Exists: Table pythonproject-190701:cmcdataset.PHR
+Traceback (most recent call last):
+  File "CMC2BigQuery.py", line 252, in create_table
+    table = bigquery_client.create_table(table)
+  File "/usr/local/lib/python2.7/dist-packages/google/cloud/bigquery/client.py", line 268, in create_table
+    method='POST', path=path, data=resource)
+  File "/usr/local/lib/python2.7/dist-packages/google/cloud/_http.py", line 293, in api_request
+    raise exceptions.from_http_response(response)
+Conflict: 409 POST https://www.googleapis.com/bigquery/v2/projects/pythonproject-190701/datasets/cmcdataset/tables: Already Exists: Table pythonproject-190701:cmcdataset.PHR
+2018-03-18 02:32:25,542 - __main__ - INFO - (u'PHR', <google.cloud.bigquery.table.Table object at 0x7f7a1ab32a10>, [[21977.0, 9234925.0, 0.00017093, 1.3119, -7.64, '2018-03-18 02:31']])
+2018-03-18 02:32:25,398 - __main__ - ERROR - 409 POST https://www.googleapis.com/bigquery/v2/projects/pythonproject-190701/datasets/cmcdataset/tables: Already Exists: Table pythonproject-190701:cmcdataset.DENT
+Traceback (most recent call last):
+  File "CMC2BigQuery.py", line 252, in create_table
+    table = bigquery_client.create_table(table)
+  File "/usr/local/lib/python2.7/dist-packages/google/cloud/bigquery/client.py", line 268, in create_table
+    method='POST', path=path, data=resource)
+  File "/usr/local/lib/python2.7/dist-packages/google/cloud/_http.py", line 293, in api_request
+    raise exceptions.from_http_response(response)
+Conflict: 409 POST https://www.googleapis.com/bigquery/v2/projects/pythonproject-190701/datasets/cmcdataset/tables: Already Exists: Table pythonproject-190701:cmcdataset.DENT
+2018-03-18 02:32:25,543 - __main__ - INFO - (u'DENT', <google.cloud.bigquery.table.Table object at 0x7f7a1abe8e50>, [[776838.0, 95811911.0, 1.18e-06, 0.00902629, -16.74, '2018-03-18 02:31']])
+2018-03-18 02:32:25,542 - __main__ - INFO - (u'NEOS', <google.cloud.bigquery.table.Table object at 0x7f7a1ac44ed0>, [[229397.0, 9035970.0, 0.00031558, 2.4219999999999997, -11.23, '2018-03-18 02:31']])
+2018-03-18 02:32:25,773 - __main__ - ERROR - Problem inserting row for symbol: PRG
+2018-03-18 02:32:25,889 - __main__ - ERROR - 409 POST https://www.googleapis.com/bigquery/v2/projects/pythonproject-190701/datasets/cmcdataset/tables: Already Exists: Table pythonproject-190701:cmcdataset.PRG
+Traceback (most recent call last):
+  File "CMC2BigQuery.py", line 252, in create_table
+    table = bigquery_client.create_table(table)
+  File "/usr/local/lib/python2.7/dist-packages/google/cloud/bigquery/client.py", line 268, in create_table
+    method='POST', path=path, data=resource)
+  File "/usr/local/lib/python2.7/dist-packages/google/cloud/_http.py", line 293, in api_request
+    raise exceptions.from_http_response(response)
+Conflict: 409 POST https://www.googleapis.com/bigquery/v2/projects/pythonproject-190701/datasets/cmcdataset/tables: Already Exists: Table pythonproject-190701:cmcdataset.PRG
+2018-03-18 02:32:25,889 - __main__ - INFO - (u'PRG', <google.cloud.bigquery.table.Table object at 0x7f7a1ac6a9d0>, [[128816.0, 13878316.0, 2.785e-05, 0.213721, -27.39, '2018-03-18 02:31']])
+2018-03-18 02:32:26,560 - __main__ - ERROR - Problem inserting row for symbol: IHT
+2018-03-18 02:32:26,682 - __main__ - ERROR - 409 POST https://www.googleapis.com/bigquery/v2/projects/pythonproject-190701/datasets/cmcdataset/tables: Already Exists: Table pythonproject-190701:cmcdataset.IHT
+Traceback (most recent call last):
+  File "CMC2BigQuery.py", line 252, in create_table
+    table = bigquery_client.create_table(table)
+  File "/usr/local/lib/python2.7/dist-packages/google/cloud/bigquery/client.py", line 268, in create_table
+    method='POST', path=path, data=resource)
+  File "/usr/local/lib/python2.7/dist-packages/google/cloud/_http.py", line 293, in api_request
+    raise exceptions.from_http_response(response)
+Conflict: 409 POST https://www.googleapis.com/bigquery/v2/projects/pythonproject-190701/datasets/cmcdataset/tables: Already Exists: Table pythonproject-190701:cmcdataset.IHT
+2018-03-18 02:32:26,683 - __main__ - INFO - (u'IHT', <google.cloud.bigquery.table.Table object at 0x7f7a1aa81350>, [[2810780.0, 16861560.0, 9.62e-06, 0.0738327, -10.92, '2018-03-18 02:31']])
+2018-03-18 02:47:23,189 - __main__ - ERROR - CMC connection error at 2018-03-18 02:47. Sleeping for 30 seconds
+2018-03-18 02:47:23,190 - __main__ - ERROR - CMC connection error at 2018-03-18 02:47. Sleeping for 30 seconds
+2018-03-18 02:47:23,190 - __main__ - ERROR - CMC connection error at 2018-03-18 02:47. Sleeping for 30 seconds
+2018-03-18 02:47:23,190 - __main__ - ERROR - CMC connection error at 2018-03-18 02:47. Sleeping for 30 seconds
+2018-03-18 02:47:23,190 - __main__ - ERROR - CMC connection error at 2018-03-18 02:47. Sleeping for 30 seconds
